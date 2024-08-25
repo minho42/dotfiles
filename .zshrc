@@ -19,7 +19,11 @@ alias python=python3
 
 alias uuid='python3 -c "import uuid; print(uuid.uuid4())"'
 # alias cal="gcal --starting-day=1"
-cal() {
+
+# ccal for typo
+alias ccal="cal"
+
+function cal() {
   if command -v gcal > /dev/null 2>&1; then
     gcal --starting-day=1 "$@"
   else
@@ -30,11 +34,9 @@ alias psql="psql -U postgres"
 alias suggestpassword="openssl rand -base64 15 | pbcopy | echo 'Password copied'"
 alias cloudflaredtunnel="cloudflared tunnel --url http://localhost:3000"
 
-alias ld="ls -ld */"
+alias ld='if [ "$(find . -maxdepth 1 -type d ! -path .)" ]; then ls -ld */; fi'
+# alias ld="ls -ld */"
 alias ld1="ls -1d */"
-
-alias tree="tree -L 1"
-alias treed="tree -dL 1"
 
 alias mongo="/Users/minhokim/mongodb/bin/mongo"
 alias mongod="/Users/minhokim/mongodb/bin/mongod --dbpath=/Users/minhokim/mongodb-data"
@@ -43,13 +45,12 @@ alias ip="curl https://icanhazip.com"
 alias ipi="ifconfig en0 | grep netmask | awk '{print \$2}'"
 alias ip4="curl http://checkip.amazonaws.com"
 
-alias zsource="source ~/.zshrc"
 # alias activate="source .venv/bin/activate"
-activate() {  
+function activate() { 
   if [ -d ".venv" ]; then
     source .venv/bin/activate
   else
-    : # ignore 
+    : # ignore no .venv
   fi
 }
 alias createvenv="uv venv && source .venv/bin/activate"
@@ -84,19 +85,22 @@ alias collectstatic="python3 manage.py collectstatic"
 
 # django settings
 # export DJANGO_SETTINGS_MODULE=settings.local
-# export CHROME_DRIVER_PATH="/Users/minhokim/code/chromedriver"
+export CHROME_DRIVER_PATH="/Users/minhokim/code/chromedriver"
 
 alias desktop="cd /Users/minhokim/Desktop"
 
 # npm
 alias dev="npm run dev"
+alias dev2="npm run dev2"
 alias start="npm run start"
 
 # project shortcuts - django
 alias contractreader="cd /Users/minhokim/code/django/contractreader && source .venv/bin/activate"
-# project shortcuts - others
-alias diary="cd /Users/minhokim/code/diary && code ."
+
+# open projects, vscode
+alias diary="cd /Users/minhokim/diary && code ."
 alias blog="cd /Users/minhokim/code/react/blog && code ."
+alias zshrc="code ~/.zshrc"
 
 # celery
 alias celerycontractreader="celery -A contractreader worker -l info -O fair"
@@ -210,7 +214,22 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 export PATH=$PATH:/usr/local/zig
 # docker
 # export PATH=$PATH:/Applications/Docker.app/Contents/Resources/bin
-PATH=~/.console-ninja/.bin:$PATH
 
-# opt out homebrew analytics
+
+# homebrew
 export HOMEBREW_NO_ANALYTICS=1
+export HOMEBREW_NO_AUTO_UPDATE=1
+
+function curl2() {
+  curl -s "$1" | jq "."
+}
+
+# rust
+export PATH=$PATH:~/.cargo/bin
+
+# alias zsource="source ~/.zshrc"
+# F5 to reload zsh
+bindkey -s "^[[15~" "source ~/.zshrc\n"
+
+# prevent django-rq error
+export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
