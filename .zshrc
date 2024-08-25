@@ -9,12 +9,17 @@ export PYTHONSTARTUP=~/.pythonstartup
 HISTSIZE=500000
 SAVEHIST=$HISTSIZE
 
-alias repo="cd /Users/minhokim/code/repo/"
+alias count='\wc -l | awk "{print \$1}"'
 
-# alias myhistory="node /Users/minhokim/code/nodejs/history-search-ink/dist/cli.js"
-alias myhistory="cd /Users/minhokim/code/python/history-search-textual && source .venv/bin/activate && python main.py"
-alias heic-converter="node /Users/minhokim/code/nodejs/heic-conveter-js/index.js -f "
+# path
+alias vscode-snippets="/Users/minho/Library/Application\ Support/Code/User/snippets"
+alias repo="cd /Users/minho/code/repo/"
 
+# alias myhistory="node /Users/minho/code/nodejs/history-search-ink/dist/cli.js"
+alias myhistory="cd /Users/minho/code/python/history-search-textual && source .venv/bin/activate && python main.py"
+alias heic-converter="node /Users/minho/code/nodejs/heic-conveter-js/index.js -f "
+
+alias sqlite=sqlite3
 alias python=python3
 
 alias uuid='python3 -c "import uuid; print(uuid.uuid4())"'
@@ -24,7 +29,7 @@ alias uuid='python3 -c "import uuid; print(uuid.uuid4())"'
 alias ccal="cal"
 
 function cal() {
-  if command -v gcal > /dev/null 2>&1; then
+  if command -v gcal >/dev/null 2>&1; then
     gcal --starting-day=1 "$@"
   else
     command cal
@@ -38,22 +43,25 @@ alias ld='if [ "$(find . -maxdepth 1 -type d ! -path .)" ]; then ls -ld */; fi'
 # alias ld="ls -ld */"
 alias ld1="ls -1d */"
 
-alias mongo="/Users/minhokim/mongodb/bin/mongo"
-alias mongod="/Users/minhokim/mongodb/bin/mongod --dbpath=/Users/minhokim/mongodb-data"
+alias mongo="/Users/minho/mongodb/bin/mongo"
+alias mongod="/Users/minho/mongodb/bin/mongod --dbpath=/Users/minho/mongodb-data"
 
 alias ip="curl https://icanhazip.com"
+alias whatismyip="curl https://icanhazip.com"
 alias ipi="ifconfig en0 | grep netmask | awk '{print \$2}'"
 alias ip4="curl http://checkip.amazonaws.com"
 
 # alias activate="source .venv/bin/activate"
-function activate() { 
+function activate() {
   if [ -d ".venv" ]; then
     source .venv/bin/activate
   else
     : # ignore no .venv
   fi
 }
-alias createvenv="uv venv && source .venv/bin/activate"
+alias createvenv="python -m venv .venv && source .venv/bin/activate && pip install --upgrade pip"
+alias uvcreatevenv="uv venv && source .venv/bin/activate"
+alias pip="pip3"
 alias uvinstall="uv pip install -r requirements.in"
 alias uvcompile="uv pip compile requirements.in -o requirements.txt"
 
@@ -85,9 +93,9 @@ alias collectstatic="python3 manage.py collectstatic"
 
 # django settings
 # export DJANGO_SETTINGS_MODULE=settings.local
-export CHROME_DRIVER_PATH="/Users/minhokim/code/chromedriver"
+export CHROME_DRIVER_PATH="/Users/minho/code/chromedriver"
 
-alias desktop="cd /Users/minhokim/Desktop"
+alias desktop="cd /Users/minho/Desktop"
 
 # npm
 alias dev="npm run dev"
@@ -95,11 +103,11 @@ alias dev2="npm run dev2"
 alias start="npm run start"
 
 # project shortcuts - django
-alias contractreader="cd /Users/minhokim/code/django/contractreader && source .venv/bin/activate"
+alias contractreader="cd /Users/minho/code/django/contractreader && source .venv/bin/activate"
 
 # open projects, vscode
-alias diary="cd /Users/minhokim/diary && code ."
-alias blog="cd /Users/minhokim/code/react/blog && code ."
+alias diary="cd /Users/minho/diary && code ."
+alias blog="cd /Users/minho/code/react/blog && code ."
 alias zshrc="code ~/.zshrc"
 
 # celery
@@ -116,7 +124,7 @@ export CELERY_BROKER_URL="redis://localhost:6379"
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/minhokim/.oh-my-zsh"
+export ZSH="/Users/minho/.oh-my-zsh"
 
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 ZSH_THEME="refined"
@@ -189,18 +197,17 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-
 # this alias doesn't work on the top of the file: ls, grep,
 # https://www.rapidtables.com/code/linux/ls.html
 alias grep="grep -i"
 
 # pnpm
 # pnpm endcommand -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-export PNPM_HOME="/Users/minhokim/Library/pnpm"
+export PNPM_HOME="/Users/minho/Library/pnpm"
 export PATH="$PNPM_HOME:$PATH"
 
 # bun completions
-[ -s "/Users/minhokim/.bun/_bun" ] && source "/Users/minhokim/.bun/_bun"
+[ -s "/Users/minho/.bun/_bun" ] && source "/Users/minho/.bun/_bun"
 
 # bun
 export BUN_INSTALL="$HOME/.bun"
@@ -210,11 +217,10 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 # [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 # [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-# zig 
+# zig
 export PATH=$PATH:/usr/local/zig
 # docker
 # export PATH=$PATH:/Applications/Docker.app/Contents/Resources/bin
-
 
 # homebrew
 export HOMEBREW_NO_ANALYTICS=1
