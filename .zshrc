@@ -9,20 +9,30 @@ export PYTHONSTARTUP=~/.pythonstartup
 HISTSIZE=500000
 SAVEHIST=$HISTSIZE
 
+alias grc="gh repo create"
+alias gil="gh issue list"
+
+alias fsize="du -sh"
+alias fsizeall="du -h"
+
 alias count='\wc -l | awk "{print \$1}"'
 
 # path
 alias vscode-snippets="/Users/minho/Library/Application\ Support/Code/User/snippets"
 alias repo="cd /Users/minho/code/repo/"
 
+# return and earn: woolworths-marsfield
+alias canirecycle='(cd /Users/minho/code/python/return-and-earn && activate && python main.py)'
+
 # alias myhistory="node /Users/minho/code/nodejs/history-search-ink/dist/cli.js"
-alias myhistory="cd /Users/minho/code/python/history-search-textual && source .venv/bin/activate && python main.py"
+alias myhistory="(cd /Users/minho/code/python/history-search-textual && source .venv/bin/activate && python main.py)"
 alias heic-converter="node /Users/minho/code/nodejs/heic-conveter-js/index.js -f "
 
 alias sqlite=sqlite3
 alias python=python3
 
-alias uuid='python3 -c "import uuid; print(uuid.uuid4())"'
+alias uuid="python -m uuid"
+# alias uuid='python3 -c "import uuid; print(uuid.uuid4())"'
 # alias cal="gcal --starting-day=1"
 
 # ccal for typo
@@ -46,10 +56,7 @@ alias ld1="ls -1d */"
 alias mongo="/Users/minho/mongodb/bin/mongo"
 alias mongod="/Users/minho/mongodb/bin/mongod --dbpath=/Users/minho/mongodb-data"
 
-alias ip="curl https://icanhazip.com"
-alias whatismyip="curl https://icanhazip.com"
-alias ipi="ifconfig en0 | grep netmask | awk '{print \$2}'"
-alias ip4="curl http://checkip.amazonaws.com"
+alias ip="curl https://icanhazip.com; ifconfig en0 | grep netmask | awk '{print \$2}'"
 
 # alias activate="source .venv/bin/activate"
 function activate() {
@@ -59,9 +66,9 @@ function activate() {
     : # ignore no .venv
   fi
 }
-alias createvenv="python -m venv .venv && source .venv/bin/activate && pip install --upgrade pip"
-alias uvcreatevenv="uv venv && source .venv/bin/activate"
+alias pycreatevenv="python -m venv .venv && source .venv/bin/activate && pip install --upgrade pip"
 alias pip="pip3"
+alias createvenv="uv venv && source .venv/bin/activate && touch requirements.in"
 alias uvinstall="uv pip install -r requirements.in"
 alias uvcompile="uv pip compile requirements.in -o requirements.txt"
 
