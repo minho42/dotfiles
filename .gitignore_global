@@ -1,0 +1,17 @@
+.DS_Store
+
+.vscode/
+.idea/
+
+venv/
+__pycache__/
+*.pyc
+
+*.log
+
+node_modules/
+
+.env
+
+*.swp
+*.bak
