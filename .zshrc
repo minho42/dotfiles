@@ -131,6 +131,7 @@ alias test="npm run test"
 alias diary="cd /Users/minho/diary"
 alias blog="cd /Users/minho/code/react/blog"
 alias zshrc="code ~/.zshrc"
+alias synczshrc="(cd /Users/minho/code/dotfiles && cp ~/.zshrc .zshrc && git add . && git commit -m 'update zshrc' && git push)"
 
 # celery
 alias celerycontractreader="celery -A contractreader worker -l info -O fair"
@@ -275,4 +276,6 @@ alias tree3="tree -L 3 -I node_modules"
 
 # this alias doesn't work on the top of the file: ls, grep,
 # https://www.rapidtables.com/code/linux/ls.html
-alias grep="ggrep -i --color "
+alias grep="ggrep -in --color "
+
+alias f="find . -maxdepth 2 -name "
