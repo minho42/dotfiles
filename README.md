@@ -1,17 +1,3 @@
-# my config files
-
-
 ## .zshrc
 
-~/`.zshrc`
-
-
-
-## vscode snippet
-
-/Users/minho/Library/Application Support/Code/User/snippets/`minho.code-snippets`
-
-```shell
-cd /Users/minho/Library/Application\ Support/Code/User/snippets/
-```
-
+cp ~/.zshrc /Users/minho/code/dotfiles/.zshrc && git add . && git commit -m 'update zshrc' && git push
