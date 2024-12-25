@@ -135,8 +135,7 @@ alias start="npm run start"
 alias test="npm run test"
 
 # zshrc
-alias zshrc="code ~/.zshrc"
-alias synczshrc="(cd ~/code/dotfiles && cp ~/.zshrc .zshrc && git add . && git commit -m 'update zshrc' && git push)"
+alias zshrc="code ~/dotfiles/.zshrc"
 
 # celery
 alias celerycontractreader="celery -A contractreader worker -l info -O fair"
@@ -152,6 +151,7 @@ export CELERY_BROKER_URL="redis://localhost:6379"
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
+# export ZSH="~/.oh-my-zsh" <- tilde doesn't work inside double quotes => use without quotes or "$HOME"
 export ZSH=~/.oh-my-zsh
 
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
@@ -252,6 +252,7 @@ export PATH=$PATH:/usr/local/zig
 export HOMEBREW_NO_ANALYTICS=1
 export HOMEBREW_NO_AUTO_UPDATE=1
 
+# reload zsh
 alias zsource="source ~/.zshrc"
 # F5 to reload zsh
 bindkey -s "^[[15~" "source ~/.zshrc\n"
@@ -280,4 +281,4 @@ alias tree3="tree -L 3 -I node_modules"
 # https://www.rapidtables.com/code/linux/ls.html
 alias grep="ggrep -in --color "
 
-alias f="find . -maxdepth 2 -name "
+alias f="find . -maxdepth 3 -name "
