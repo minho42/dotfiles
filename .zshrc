@@ -9,8 +9,6 @@ zmodload zsh/zprof
 HISTSIZE=500000
 SAVEHIST=$HISTSIZE
 
-alias swift="swift repl"
-
 alias today="date +%F | pbcopy && echo '$(pbpaste)'"
 
 alias brewup="brew update && brew upgrade && brew cleanup"
@@ -20,22 +18,27 @@ alias storage="diskutil info / | grep 'Container' | awk '/Free Space/ {free=\$4;
 alias fsize="du -sh"
 alias fsizeall="du -h"
 
+# usage: ls | count
 alias count='\wc -l | awk "{print \$1}"'
 
-# path
-alias vscode-snippets="/Users/minho/Library/Application\ Support/Code/User/snippets"
-alias repo="cd /Users/minho/code/repo/"
+# path shortcuts
+# alias vscode-snippets="~/Library/Application\ Support/Code/User/snippets"
+alias repo="cd ~/code/repo/"
+alias diary="cd ~/diary"
+alias blog="cd ~/code/react/blog"
+alias desktop="cd ~/Desktop"
+alias leetcode="cd ~/code/coding-interview-prep/leetcode"
 
 # return and earn: woolworths-marsfield
-alias return-and-earn-update-db='(cd /Users/minho/code/python/return-and-earn && activate && python3 main.py)'
+alias return-and-earn-update-db='(cd ~/code/python/return-and-earn && activate && python3 main.py)'
 
-# alias myhistory="node /Users/minho/code/nodejs/history-search-ink/dist/cli.js"
-alias myhistory="(cd /Users/minho/code/python/history-search-textual && source .venv/bin/activate && python3 main.py)"
-alias heic-converter="node /Users/minho/code/nodejs/heic-conveter-js/index.js -f "
+# alias myhistory="node ~/code/nodejs/history-search-ink/dist/cli.js"
+alias myhistory="(cd ~/code/python/history-search-textual && source .venv/bin/activate && python3 main.py)"
+alias heic-converter="node ~/code/nodejs/heic-conveter-js/index.js -f "
 # curl0: run curl with local redis cache
-# alias curl0="node /Users/minho/code/nodejs/curl-with-redis-cache/index.js"
+alias curl0="node ~/code/nodejs/curl-with-redis-cache/index.js"
 
-alias sqlite=sqlite3
+# alias sqlite=sqlite3
 # alias python=python3
 
 alias uuid="python3 -m uuid"
@@ -55,23 +58,10 @@ function cal() {
     command cal
   fi
 }
-alias psql="psql -U postgres"
-alias suggestpassword="openssl rand -base64 15 | pbcopy | echo 'Password copied'"
-alias cloudflaredtunnel="cloudflared tunnel --url http://localhost:3000"
 
-alias ld='if [ "$(find . -maxdepth 1 -type d ! -path .)" ]; then ls -ld */; fi'
-# alias ld="ls -ld */"
-alias ld1="ls -1d */"
-
-# alias mongo="/Users/minho/mongodb/bin/mongo"
-# alias mongod="/Users/minho/mongodb/bin/mongod --dbpath=/Users/minho/mongodb-data"
-
-alias mongostart="brew services start mongodb-community"
-alias mongostop="brew services stop mongodb-community"
-
-alias ip="echo -n 'router: '; netstat -nr | grep 'default' | grep 'en0' | awk '{print \$2}'; 
-echo -n 'local: '; ifconfig en0 | grep netmask | awk '{print \$2}'; 
-echo -n 'public: '; curl -s https://icanhazip.com --connect-timeout 5"
+function curl2() {
+  curl -s "$1" | jq "." 2>/dev/null || curl -s "$1"
+}
 
 # alias activate="source .venv/bin/activate"
 function activate() {
@@ -81,6 +71,24 @@ function activate() {
     : # ignore no .venv
   fi
 }
+
+alias psql="psql -U postgres"
+alias suggestpassword="openssl rand -base64 15 | pbcopy | echo 'Password copied'"
+alias cloudflaredtunnel="cloudflared tunnel --url http://localhost:3000"
+
+alias ld='if [ "$(find . -maxdepth 1 -type d ! -path .)" ]; then ls -ld */; fi'
+alias ld0="ls -1d */"
+
+# alias mongo="~/mongodb/bin/mongo"
+# alias mongod="~/mongodb/bin/mongod --dbpath=~/mongodb-data"
+
+alias mongostart="brew services start mongodb-community"
+alias mongostop="brew services stop mongodb-community"
+
+alias ip="echo -n 'router: '; netstat -nr | grep 'default' | grep 'en0' | awk '{print \$2}'; 
+echo -n 'local: '; ifconfig en0 | grep netmask | awk '{print \$2}'; 
+echo -n 'public: '; curl -s https://icanhazip.com --connect-timeout 5"
+
 alias createvenv-with-pip="python3 -m venv .venv && source .venv/bin/activate && pip install --upgrade pip"
 alias pip="pip3"
 alias createvenv="uv venv && source .venv/bin/activate && touch requirements.in"
@@ -89,6 +97,7 @@ alias uvinstall="uv pip install -r requirements.in && uv pip compile requirement
 
 # mac
 alias chrome="open -a 'google chrome' "
+alias ch=chrome
 
 # docker-compose
 alias dcup="docker-compose up"
@@ -114,24 +123,20 @@ alias shellplus="python3 manage.py shell_plus"
 alias collectstatic="python3 manage.py collectstatic"
 
 # django project alias
-alias runserver-abbr="(cd /Users/minho/code/django/abbr && activate && code . && chrome http://localhost:8000/ && runserver)"
+alias runserver-abbr="(cd ~/code/django/abbr && activate && code . && chrome http://localhost:8000/ && runserver)"
 
 # django settings
 # export DJANGO_SETTINGS_MODULE=settings.local
-export CHROME_DRIVER_PATH="/Users/minho/code/chromedriver"
-
-alias desktop="cd /Users/minho/Desktop"
+export CHROME_DRIVER_PATH="~/code/chromedriver"
 
 # npm
 alias dev="npm run dev"
 alias start="npm run start"
 alias test="npm run test"
 
-# open projects, vscode
-alias diary="cd /Users/minho/diary"
-alias blog="cd /Users/minho/code/react/blog"
+# zshrc
 alias zshrc="code ~/.zshrc"
-alias synczshrc="(cd /Users/minho/code/dotfiles && cp ~/.zshrc .zshrc && git add . && git commit -m 'update zshrc' && git push)"
+alias synczshrc="(cd ~/code/dotfiles && cp ~/.zshrc .zshrc && git add . && git commit -m 'update zshrc' && git push)"
 
 # celery
 alias celerycontractreader="celery -A contractreader worker -l info -O fair"
@@ -147,10 +152,11 @@ export CELERY_BROKER_URL="redis://localhost:6379"
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/minho/.oh-my-zsh"
+export ZSH=~/.oh-my-zsh
 
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 # ZSH_THEME="agnoster"
+# ZSH_THEME="robbyrussell"
 ZSH_THEME="refined"
 
 # Uncomment the following line to disable bi-weekly auto-update checks.
@@ -223,11 +229,11 @@ source $ZSH/oh-my-zsh.sh
 
 # pnpm
 # pnpm endcommand -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-export PNPM_HOME="/Users/minho/Library/pnpm"
+export PNPM_HOME="~/Library/pnpm"
 export PATH="$PNPM_HOME:$PATH"
 
 # bun completions
-[ -s "/Users/minho/.bun/_bun" ] && source "/Users/minho/.bun/_bun"
+[ -s "~/.bun/_bun" ] && source "~/.bun/_bun"
 
 # bun
 export BUN_INSTALL="$HOME/.bun"
@@ -246,10 +252,6 @@ export PATH=$PATH:/usr/local/zig
 export HOMEBREW_NO_ANALYTICS=1
 export HOMEBREW_NO_AUTO_UPDATE=1
 
-function curl2() {
-  curl -s "$1" | jq "." 2>/dev/null || curl -s "$1"
-}
-
 alias zsource="source ~/.zshrc"
 # F5 to reload zsh
 bindkey -s "^[[15~" "source ~/.zshrc\n"
@@ -259,11 +261,11 @@ export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
 
 alias pywatch="ls *.py | entr -r python3 "
 
+# copy from hyperneutrino
 alias aos="python3 solution.py < in.txt"
 alias aot="python3 solution.py < test.txt"
 alias aoc="aot; echo; aos"
 
-alias leetcode="cd /Users/minho/code/coding-interview-prep/leetcode"
 # alias pwd="pwd | pbcopy"
 
 alias tree1="tree -L 1"
