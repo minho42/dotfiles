@@ -135,7 +135,7 @@ alias start="npm run start"
 alias test="npm run test"
 
 # zshrc
-alias zshrc="code ~/dotfiles/.zshrc"
+alias zshrc="code ~/code/dotfiles/.zshrc"
 
 # celery
 alias celerycontractreader="celery -A contractreader worker -l info -O fair"
