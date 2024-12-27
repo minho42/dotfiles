@@ -282,3 +282,13 @@ alias tree3="tree -L 3 -I node_modules"
 alias grep="ggrep -in --color "
 
 alias f="find . -maxdepth 3 -name "
+
+rint() {
+  local size=${1:-4}
+  python3 -c "import random; print([random.randint(0,$size) for _ in range(int($size))])"
+}
+
+rchar() {
+  local size=${1:-4}
+  python3 -c "import random; import string; print([random.choice(string.ascii_lowercase) for _ in range(int($size))])"
+}
