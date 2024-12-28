@@ -9,7 +9,8 @@ zmodload zsh/zprof
 HISTSIZE=500000
 SAVEHIST=$HISTSIZE
 
-alias today="date +%F | pbcopy && echo '$(pbpaste)'"
+# alias today="date +%F | pbcopy && echo '$(pbpaste)'"
+alias today="date +%F | tee >(pbcopy)"
 
 alias brewup="brew update && brew upgrade && brew cleanup"
 
@@ -283,12 +284,22 @@ alias grep="ggrep -in --color "
 
 alias f="find . -maxdepth 3 -name "
 
-rint() {
+int() {
   local size=${1:-4}
   python3 -c "import random; print([random.randint(0,$size) for _ in range(int($size))])"
 }
 
-rchar() {
+char() {
   local size=${1:-4}
   python3 -c "import random; import string; print([random.choice(string.ascii_lowercase) for _ in range(int($size))])"
+}
+
+# dictionary.app
+dict() {
+  open "dict://$*"
+}
+
+# brew package dict
+wn() {
+  dict -d wn "$*"
 }
