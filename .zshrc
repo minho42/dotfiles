@@ -280,9 +280,13 @@ alias tree3="tree -L 3 -I node_modules"
 
 # this alias doesn't work on the top of the file: ls, grep,
 # https://www.rapidtables.com/code/linux/ls.html
+# -i: case insensitive
+# -n: line number
+# alias grep="grep -in "
+
 alias grep="ggrep -in --color "
 
-alias f="find . -maxdepth 3 -name "
+# alias f="find . -maxdepth 3 -name " # -> use alternative "fd"
 
 int() {
   local size=${1:-4}
@@ -299,7 +303,25 @@ dict() {
   open "dict://$*"
 }
 
-# brew package dict
-wn() {
-  dict -d wn "$*"
+# https://github.com/jqlang/jq
+# https://github.com/sharkdp/bat
+wiki() {
+  title="$1"
+  if [[ -z "$title" ]]; then
+    echo "usage: wiki <title>"
+    return 1
+  fi
+
+  curl -sG "https://en.wikipedia.org/w/api.php" \
+    --data-urlencode "action=query" \
+    --data-urlencode "prop=extracts" \
+    --data-urlencode "exintro=" \
+    --data-urlencode "redirects=" \
+    --data-urlencode "format=json" \
+    --data-urlencode "titles=$title" |
+    jq '.query.pages | to_entries[0].value.extract' |
+    bat -l html
 }
+
+# https://github.com/sharkdp/bat?tab=readme-ov-file#highlighting-theme
+export BAT_THEME="Dracula"
