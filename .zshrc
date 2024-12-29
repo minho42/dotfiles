@@ -96,10 +96,6 @@ alias createvenv="uv venv && source .venv/bin/activate && touch requirements.in"
 alias uvinstall="uv pip install -r requirements.in && uv pip compile requirements.in -o requirements.txt"
 # alias uvcompile="uv pip compile requirements.in -o requirements.txt"
 
-# mac
-alias chrome="open -a 'google chrome' "
-alias ch=chrome
-
 # docker-compose
 alias dcup="docker-compose up"
 alias dcupbuild="docker-compose up --build"
@@ -137,6 +133,8 @@ alias test="npm run test"
 
 # zshrc
 alias zshrc="code ~/code/dotfiles/.zshrc"
+
+alias commands="code ~/code/commands.txt"
 
 # celery
 alias celerycontractreader="celery -A contractreader worker -l info -O fair"
@@ -290,12 +288,16 @@ alias grep="ggrep -in --color "
 
 int() {
   local size=${1:-4}
-  python3 -c "import random; print([random.randint(0,$size) for _ in range(int($size))])"
+  result=$(python3 -c "import random; print([random.randint(0, $size) for _ in range(int($size))])")
+  echo "$result"
+  echo "$result" | pbcopy
 }
 
 char() {
   local size=${1:-4}
-  python3 -c "import random; import string; print([random.choice(string.ascii_lowercase) for _ in range(int($size))])"
+  result=$(python3 -c "import random; import string; print([random.choice(string.ascii_lowercase) for _ in range(int($size))])")
+  echo "$result"
+  echo "$result" | pbcopy
 }
 
 # dictionary.app
@@ -321,6 +323,14 @@ wiki() {
     --data-urlencode "titles=$title" |
     jq '.query.pages | to_entries[0].value.extract' |
     bat -l html
+}
+
+chrome() {
+  if [[ -z "$*" ]]; then
+    open -a "google chrome"
+  else
+    open -a "google chrome" "https://www.google.com/search?q=$(echo "$*" | sed 's/ /+/g')"
+  fi
 }
 
 # https://github.com/sharkdp/bat?tab=readme-ov-file#highlighting-theme
