@@ -44,21 +44,9 @@ alias curl0="node ~/code/nodejs/curl-with-redis-cache/index.js"
 
 alias uuid="python3 -m uuid"
 # alias uuid='python3 -c "import uuid; print(uuid.uuid4())"'
-# alias cal="gcal --starting-day=1"
 
 # apple calendar
 alias acal='$(find ~/Library/Developer/Xcode/DerivedData -name "CalendarCLI" -type f -path "*/Build/Products/Debug/*" -print -quit)'
-
-# ccal for typo
-alias ccal="cal"
-
-function cal() {
-  if command -v gcal >/dev/null 2>&1; then
-    gcal --starting-day=1 "$@"
-  else
-    command cal
-  fi
-}
 
 function curl2() {
   curl -s "$1" | jq "." 2>/dev/null || curl -s "$1"
