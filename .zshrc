@@ -26,7 +26,7 @@ alias count='\wc -l | awk "{print \$1}"'
 # alias vscode-snippets="~/Library/Application\ Support/Code/User/snippets"
 alias repo="cd ~/code/repo/"
 alias diary="cd ~/diary"
-alias blog="cd ~/code/react/blog"
+alias blog="cd ~/code/blog/blog2"
 alias desktop="cd ~/Desktop"
 alias leetcode="cd ~/code/coding-interview-prep/leetcode"
 
